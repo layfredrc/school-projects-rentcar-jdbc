@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="639.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.FactureController">
+   <children>
+      <AnchorPane layoutX="8.0" layoutY="8.0" prefHeight="616.0" prefWidth="662.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="149.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo.JPG" />
+               </image>
+            </ImageView>
+            <Button fx:id="clientBtn" layoutX="334.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadClientPage" style="-fx-background-color: #43BF8D;" text="Client" textFill="WHITE" />
+            <Button fx:id="vehiculeBtn" layoutX="417.0" layoutY="19.0" mnemonicParsing="false" onAction="#loadVehiculePage" style="-fx-background-color: #43BF8D;" text="Vehicule" textFill="WHITE" />
+            <Button fx:id="locationBtn" layoutX="519.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadLocationPage" style="-fx-background-color: #43BF8D;" text="Location" textFill="WHITE" />
+            <Label layoutX="230.0" layoutY="17.0" text="Facture">
+               <font>
+                  <Font name="Gill Sans MT Bold" size="20.0" />
+               </font></Label>
+            <Label layoutX="45.0" layoutY="79.0" text="Matricule Vehicule" />
+            <Label layoutX="196.0" layoutY="80.0" text="ID Client" />
+            <TextArea fx:id="factureTxt" layoutX="27.0" layoutY="161.0" prefHeight="452.0" prefWidth="606.0" />
+            <TextField fx:id="inputMatricule" layoutX="31.0" layoutY="106.0" prefHeight="26.0" prefWidth="114.0" />
+            <TextField fx:id="inputIdClient" layoutX="185.0" layoutY="106.0" prefHeight="26.0" prefWidth="127.0" />
+            <TextField fx:id="inputIdFacture" layoutX="348.0" layoutY="106.0" prefHeight="26.0" prefWidth="114.0" />
+            <Label layoutX="348.0" layoutY="80.0" text="ID Facture" />
+            <Button fx:id="getFacture" layoutX="496.0" layoutY="107.0" mnemonicParsing="false" onAction="#getFacture" text="Générer Facture" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

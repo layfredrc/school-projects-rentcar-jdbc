@@ -1,0 +1,282 @@
+-- ===============================================================
+--
+--   NOM du Cas       :  BDD_RENTCAR
+--   NOM de SGBD      :  MySQL
+--   Date de création :  MAI 2021
+--   Auteur           :  HUANG Pascal LAY Frédéric QURESHI Hammad
+--
+-- ===============================================================
+DROP DATABASE IF EXISTS rentcar;
+CREATE DATABASE rentcar;
+USE rentcar;
+
+DROP TABLE IF EXISTS EMPLOYE ;
+DROP TABLE IF EXISTS CHAUFFEUR ;
+DROP TABLE IF EXISTS VEHICULE ;
+DROP TABLE IF EXISTS CLIENT ;
+DROP TABLE IF EXISTS PROGRAMME_FIDELITE ;
+DROP TABLE IF EXISTS ASSURANCE ;
+DROP TABLE IF EXISTS AGENCE ;
+DROP TABLE IF EXISTS ADRESSE ;
+DROP TABLE IF EXISTS FACTURE ;
+DROP TABLE IF EXISTS REPARTIR ;
+DROP TABLE IF EXISTS RESERVER ;
+DROP TABLE IF EXISTS LOUER ;
+DROP TABLE IF EXISTS RENDRE ;
+DROP TABLE IF EXISTS SOUSCRIT ;
+DROP TABLE IF EXISTS STATIONNER ;
+DROP TABLE IF EXISTS HABITE_A ;
+
+#------------------------------------------------------------
+# TABLE: EMPLOYE
+#------------------------------------------------------------
+
+CREATE TABLE EMPLOYE(
+   ID_EMPLOYE 		INT NOT NULL AUTO_INCREMENT,
+   NOM 				VARCHAR(50) NOT NULL,
+   PRENOM 			VARCHAR(50) NOT NULL,
+   EMAIL 			VARCHAR(50) NOT NULL,
+   NUM_TEL 			CHAR(50) NOT NULL,
+   RUE 				VARCHAR(50) NOT NULL,
+   VILLE 			VARCHAR(50) NOT NULL,
+   CODE_POSTAL 		NUMERIC (5) NOT NULL,
+   CONSTRAINT EMPLOYE_PK PRIMARY KEY (ID_EMPLOYE)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: CHAUFFEUR
+#------------------------------------------------------------
+
+CREATE TABLE CHAUFFEUR(
+   ID_CHAUFFEUR 	INT NOT NULL AUTO_INCREMENT,
+   NOM 				VARCHAR(50) NOT NULL,
+   PRENOM 			VARCHAR(50) NOT NULL,
+   EMAIL 			VARCHAR(50) NOT NULL,
+   NUM_TEL 			CHAR(50) NOT NULL,
+   ID_EMPLOYE 		INT NOT NULL,
+   CONSTRAINT CHAUFFEUR_PK PRIMARY KEY (ID_CHAUFFEUR),
+   CONSTRAINT CHAUFFEUR_EMPLOYE_AK UNIQUE (ID_EMPLOYE),
+   CONSTRAINT CHAUFFEUR_EMPLOYE_FK FOREIGN KEY (ID_EMPLOYE) REFERENCES EMPLOYE(ID_EMPLOYE)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: VEHICULE
+#------------------------------------------------------------
+
+CREATE TABLE VEHICULE(
+   MATRICULE 			VARCHAR(50) NOT NULL,
+   MARQUE 				VARCHAR(50) NOT NULL,
+   MODELE 				VARCHAR(50),
+   KILOMETRAGE 			VARCHAR(50) NOT NULL,
+   BOITE 				VARCHAR(50),
+   CLIMATISATION 		BOOL NOT NULL,
+   RESERVOIRE 			VARCHAR(50),
+   ETAT 				VARCHAR(50),
+   CATEGORIE 			ENUM ('ECONOMIQUE', 'CONFORT', 'LUXE'),
+   CARBURANT 			ENUM ('GAZOLE', 'ESSENCE', 'SP95', 'GPL', 'ELECTRIQUE', 'ETHANOL'),
+   TARIF_JOUR 			NUMERIC (3) NOT NULL,
+   CAUTION 				NUMERIC (6) NOT NULL,
+   CONSTRAINT VEHICULE_PK PRIMARY KEY (MATRICULE)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: CLIENT
+#------------------------------------------------------------
+
+CREATE TABLE CLIENT(
+   ID_CLIENT 			INT NOT NULL AUTO_INCREMENT,
+   NOM 					VARCHAR(50) NOT NULL,
+   PRENOM 				VARCHAR(50) NOT NULL,
+   EMAIL 				VARCHAR(50) NOT NULL,
+   NUM_TEL 				VARCHAR(50) NOT NULL,
+   RUE 					VARCHAR(50) NOT NULL,
+   VILLE 				VARCHAR(50) NOT NULL,
+   CODE_POSTAL 			NUMERIC(5) NOT NULL,
+   NB_LOC				NUMERIC(4) NOT NULL,
+   CONSTRAINT CLIENT_PK PRIMARY KEY(ID_CLIENT)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: PROGRAMME DE FIDELITE
+#------------------------------------------------------------
+
+CREATE TABLE PROGRAMME_FIDELITE(
+   ID_FIDELITE 			INT NOT NULL AUTO_INCREMENT,
+   DUREE 				NUMERIC (3) NOT NULL,
+   DESCRIPTION 			ENUM ('PLATINIUM', 'GOLD', 'BRONZE'),
+   PRIX 				NUMERIC (6) NOT NULL,
+   TAUX_REDUC 			INT NOT NULL,
+   CONSTRAINT PROGRAMME_FIDELITE_PK PRIMARY KEY(ID_FIDELITE)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: ASSURANCE
+#------------------------------------------------------------
+
+CREATE TABLE ASSURANCE(
+   ID_ASSURANCE 		INT NOT NULL AUTO_INCREMENT,
+   DESCRIPTION 			VARCHAR(50),
+   PRIX 				NUMERIC (6) NOT NULL,
+   CONSTRAINT ASSURANCE_PK PRIMARY KEY(ID_ASSURANCE)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: AGENCE
+#------------------------------------------------------------
+
+CREATE TABLE AGENCE(
+   ID_AGENCE 			INT NOT NULL AUTO_INCREMENT,
+   NOM 					VARCHAR(50) NOT NULL,
+   NUM_TEL 				NUMERIC (10) NOT NULL,
+   ADRESSE 				VARCHAR(250) NOT NULL,
+   COORDONNEES_GPS 		VARCHAR(50) NOT NULL,
+   CONSTRAINT AGENCE_PK PRIMARY KEY(ID_AGENCE)
+) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: ADRESSE
+#------------------------------------------------------------
+
+#CREATE TABLE ADRESSE(
+#   ID_ADRESSE 			INT NOT NULL AUTO_INCREMENT,
+#   RUE 					VARCHAR(50) NOT NULL,
+#   VILLE 				VARCHAR(50) NOT NULL,
+#   CODE_POSTAL 			NUMERIC (5) NOT NULL,
+#   CONSTRAINT ADRESSE PRIMARY KEY(ID_ADRESSE)
+#) ENGINE = 'InnoDB';
+
+#------------------------------------------------------------
+# TABLE: FACTURE OU DEVIS
+#------------------------------------------------------------
+
+CREATE TABLE FACTURE(
+   ID_FACTURE 			INT NOT NULL AUTO_INCREMENT,
+   DUREE_LOC 			VARCHAR(50) NOT NULL,
+   CONSTRAINT FACTURE_PK PRIMARY KEY(ID_FACTURE)
+) ENGINE = 'InnoDB';
+
+CREATE TABLE REPARTIR(
+   ID_CHAUFFEUR 		INT NOT NULL AUTO_INCREMENT,
+   MATRICULE 			VARCHAR(50) NOT NULL,
+   CONSTRAINT REPARTIR_PK PRIMARY KEY(ID_CHAUFFEUR, MATRICULE),
+   CONSTRAINT REPARTIR_CHAUFFEUR_FK FOREIGN KEY(ID_CHAUFFEUR) REFERENCES CHAUFFEUR(ID_CHAUFFEUR),
+   CONSTRAINT REPARTIR_MATRICULE_FK FOREIGN KEY(MATRICULE) REFERENCES VEHICULE(MATRICULE)
+) ENGINE = 'InnoDB';
+
+CREATE TABLE RESERVER(
+   MATRICULE 			VARCHAR(50) NOT NULL,
+   DATE_RESERV 			DATE,
+   ID_CLIENT 			INT NOT NULL AUTO_INCREMENT,
+   CONSTRAINT RESERVER_PK PRIMARY KEY(MATRICULE),
+   CONSTRAINT RESERVER_MATRICULE_FK FOREIGN KEY(MATRICULE) REFERENCES VEHICULE(MATRICULE),
+   CONSTRAINT RESERVER_CLIENT_FK FOREIGN KEY(ID_CLIENT) REFERENCES CLIENT(ID_CLIENT)
+) ENGINE = 'InnoDB';
+
+CREATE TABLE LOCATION(
+   MATRICULE 			VARCHAR(50) NOT NULL,
+   DATE_DEBUT 			DATE,
+   DATE_FIN				DATE,
+   ID_CLIENT 			INT NOT NULL,
+   ID_FACTURE 			INT NOT NULL,
+   CONSTRAINT LOCATION_PK PRIMARY KEY(ID_CLIENT, MATRICULE, ID_FACTURE),
+   CONSTRAINT LOUER_VEHICULE_FK FOREIGN KEY(MATRICULE) REFERENCES VEHICULE(MATRICULE),
+   CONSTRAINT LOCATION_CLIENT_FK FOREIGN KEY(ID_CLIENT) REFERENCES CLIENT(ID_CLIENT),
+   CONSTRAINT LOUER_FACTURE_FK FOREIGN KEY(ID_FACTURE) REFERENCES FACTURE(ID_FACTURE)
+) ENGINE = 'InnoDB';
+
+CREATE TABLE SOUSCRIT(
+   ID_CLIENT 			INT NOT NULL,
+   ID_FIDELITE 			INT NOT NULL,
+   ID_ASSURANCE 		INT NOT NULL,
+   DATE_SOUSCRIPTION 	DATE,
+   CONSTRAINT SOUSCRIT_PK PRIMARY KEY(ID_CLIENT, ID_FIDELITE, ID_ASSURANCE),
+   CONSTRAINT SOUSCRIT_CLIENT_FK FOREIGN KEY(ID_CLIENT) REFERENCES CLIENT(ID_CLIENT),
+   CONSTRAINT SOUSCRIT_PROGRAMME_FIDELITE_FK FOREIGN KEY(ID_FIDELITE) REFERENCES PROGRAMME_FIDELITE(ID_FIDELITE),
+   CONSTRAINT SOUSCRIT_ASSURANCE_FK FOREIGN KEY(ID_ASSURANCE) REFERENCES ASSURANCE(ID_ASSURANCE)
+) ENGINE = 'InnoDB';
+
+CREATE TABLE STATIONNER(
+   MATRICULE 			VARCHAR(50) NOT NULL,
+   ID_AGENCE 			INT NOT NULL,
+   COORDONNEES_GPS 		VARCHAR(50),
+   CONSTRAINT STATIONNER_PK PRIMARY KEY(MATRICULE, ID_AGENCE),
+   CONSTRAINT SOUSCRIT_VEHICULE_FK FOREIGN KEY(MATRICULE) REFERENCES VEHICULE(MATRICULE),
+   CONSTRAINT SOUSCRIT_AGENCE_FK FOREIGN KEY(ID_AGENCE) REFERENCES AGENCE(ID_AGENCE)
+) ENGINE = 'InnoDB';
+
+CREATE TABLE HABITE_A(
+   ID_EMPLOYE 			INT NOT NULL,
+   ID_CLIENT 			INT NOT NULL,
+   #ID_ADRESSE 			INT NOT NULL,
+   CONSTRAINT HABITE_A_PK PRIMARY KEY(ID_EMPLOYE, ID_CLIENT), #ID_ADRESSE),
+   CONSTRAINT HABITE_A_EMPLOYE_FK FOREIGN KEY(ID_EMPLOYE) REFERENCES EMPLOYE(ID_EMPLOYE),
+   CONSTRAINT HABITE_A_CLIENT_FK FOREIGN KEY(ID_CLIENT) REFERENCES CLIENT(ID_CLIENT)
+   #CONSTRAINT HABITE_A_ADRESSE_FK FOREIGN KEY(ID_ADRESSE) REFERENCES ADRESSE(ID_ADRESSE)
+) ENGINE = 'InnoDB';
+
+COMMIT;
+
+SELECT * FROM EMPLOYE ;
+SELECT * FROM CHAUFFEUR ;
+SELECT * FROM VEHICULE ;
+SELECT * FROM CLIENT ;
+SELECT * FROM AGENCE ;
+SELECT * FROM FACTURE ;
+
+Insert into Vehicule values ('AZ123GF','Peugeot','206','20000','manuelle',true,'vide','bon_etat','ECONOMIQUE','GAZOLE',30,300);
+Insert into Vehicule values ('kH456GH','Tesla','Model X','1000','automatique',true,'3/4','neuf','CONFORT','ELECTRIQUE',50,800);
+Insert into Vehicule values ('AJ789MA','Ford','Ranger','4500','automatique',true,'1/4','bon_etat','CONFORT','GAZOLE',20,400);
+Insert into Vehicule values ('DF012CS','Audi','R8 GT','70000','automatique',true,'1/2','bon_etat','LUXE','ESSENCE',60,900);
+Insert into Vehicule values ('WX345VE','Citroen','C6','180000','manuelle',true,'vide','usee','ECONOMIQUE','GAZOLE',25,300);
+
+
+Insert into Employe values (1,'MARTIN','Jean','Martin.jean@gmail.com','0611111111',"5 rue de l'ecole",'PARIS','75020');
+Insert into Employe values (2,'BERNARD','Eric','Bernard.eric@gmail.com','0622222222','12 rue de la chine','PARIS','75010');
+Insert into Employe values (3,'THOMAS','Alan','Thomas.alan@gmail.com','0633333333','45 rue du poulet','PARIS','75008');
+Insert into Employe values (4,'PETIT','Robert','Petit.robert@gmail.com','0644444444','76 avenue du bitcoin','LILLE','59160');
+Insert into Employe values (5,'DURAND','Alex','Durand.alex@gmail.com','0655555555','112 boulevard des capucines','NICE','06100');
+
+Insert into Chauffeur values (1,'THOMAS','Alan','Thomas.alan@gmail.com','0633333333',3);
+Insert into Chauffeur values (2,'PETIT','Robert','Petit.robert@gmail.com','0644444444',4);
+Insert into Chauffeur values (3,'MARTIN','Jean','Martin.jean@gmail.com','0611111111',1);
+
+Insert into Client values (1,'DUBOIS','Lola','Dubois.lola@gmail.com','0655555555','74 rue de la liberte','PARIS','75001',1);
+Insert into Client values (2,'MOREAU','Andrea','Moreau.andrea@gmail.com','0666666666','86 impasse de belle','PARIS','75016',3);
+Insert into Client values (3,'LAURENT','Aymeric','Laurent.aymeric@gmail.com','0677777777','2 rue victor hugo','AUBERVILLIERS','93300',0);
+Insert into Client values (4,'SIMON','Elsa','Simon.elsa@gmail.com','0688888888','4 rue de cheval','AUBERVILLLIERS','93300',4);
+Insert into Client values (5,'MICHEL','Dylan','Michel.dylan@gmail.com','0699999999',"90 rue de l'avion",'PARIS','75020',0);
+
+Insert into Programme_Fidelite values (1, 30, 'Programme de fidélité pour 1 mois', 20, 10);
+Insert into Programme_Fidelite values (2, 365, 'Programme de fidélité pour 1 an', 100, 15);
+Insert into Programme_Fidelite values (3, 90, 'Programme de fidélité pour 3 mois', 50, 10);
+
+Insert into Assurance values (1, 'assurance tout risque', 40);
+Insert into Assurance values (2, 'assurance accident', 20);
+
+Insert into Agence values (1, "EUROCAR", '0456765342',"5 rue de l'aval", '4 594 38');
+Insert into Agence values (2, 'CARCAR', '0496746585', "45 avenue de l'eclair",'5 657 90');
+Insert into Agence values (3, 'BLABLACAR', '0489603857', '9 impasse de verre','7 823 09');
+
+INSERT INTO FACTURE VALUES(1,26);
+INSERT INTO FACTURE VALUES(2,30);
+INSERT INTO FACTURE VALUES(3,14);
+INSERT INTO FACTURE VALUES(4,12);
+INSERT INTO FACTURE VALUES(5,20);
+INSERT INTO FACTURE VALUES(6,20);
+
+INSERT INTO LOCATION VALUES('SFSKCAZ74',"2021-05-30","2021-06-25",9,1);
+INSERT INTO LOCATION VALUES('AZERTY360',"2021-05-30","2021-06-29",7,2);
+INSERT INTO LOCATION VALUES('kH456GH',"2021-05-30","2021-06-13",8,3);
+INSERT INTO LOCATION VALUES('AZ123GF',"2021-05-30","2021-06-11",4,4);
+INSERT INTO LOCATION VALUES('DF012CS',"2021-05-30","2021-06-19",1,5);
+INSERT INTO LOCATION VALUES('AZERTY360',"2021-05-01","2021-05-21",2,6);
+
+DELETE From LOCATION;
+
+Select * from CLIENT WHERE ID_CLIENT = 10;
+Select * from VEHICULE order by CATEGORIE;
+SELECT * from vehicule V, location loc WHERE V.MATRICULE = loc.MATRICULE AND loc.DATE_FIN > current_date() AND loc.DATE_DEBUT <= current_date() ;
+SELECT * from CLIENT C, location loc WHERE C.ID_CLIENT = loc.ID_CLIENT AND loc.DATE_FIN > current_date() AND loc.DATE_DEBUT <= current_date();
+SELECT * FROM CLIENT C, VEHICULE V, LOCATION LOC WHERE V.MATRICULE = LOC.MATRICULE AND C.ID_CLIENT = LOC.ID_CLIENT AND LOC.MATRICULE = "AZERTY360";
+SELECT current_date();
+show grants 

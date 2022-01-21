@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="419.0" style="-fx-border-radius: 50;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MainController">
+   <children>
+      <Pane layoutX="19.0" layoutY="19.0" prefHeight="359.0" prefWidth="376.0" style="-fx-background-color: white;">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="28.0" layoutY="90.0" text="Email">
+               <font>
+                  <Font name="Gill Sans MT" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailTxt" layoutX="28.0" layoutY="124.0" prefHeight="32.0" prefWidth="309.0" style="-fx-border-radius: 50;" />
+            <Label layoutX="28.0" layoutY="180.0" text="Mot de passe">
+               <font>
+                  <Font name="Gill Sans MT" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordTxt" layoutX="28.0" layoutY="213.0" prefHeight="32.0" prefWidth="309.0" />
+            <Button fx:id="loginBtn" layoutX="108.0" layoutY="272.0" mnemonicParsing="false" onAction="#getLogin" style="-fx-background-color: #43BF8D;" text="Se connecter" textFill="WHITE">
+               <font>
+                  <Font name="OCR A Extended" size="18.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="56.0" fitWidth="211.0" layoutX="80.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo.JPG" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+   <effect>
+      <DropShadow height="31.95" radius="12.254999999999999" spread="0.52" width="19.07" />
+   </effect>
+</AnchorPane>

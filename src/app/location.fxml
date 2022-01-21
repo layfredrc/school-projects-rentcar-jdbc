@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.LocationController">
+
+    <children>
+        <Pane layoutX="3.0" layoutY="-1.0" prefHeight="545.0" prefWidth="882.0" style="-fx-background-color: white;">
+            <children>
+                <ImageView fitHeight="53.0" fitWidth="200.0" layoutX="34.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/logo.JPG" />
+                    </image>
+                </ImageView>
+                <Button layoutX="500.0" layoutY="235.0" mnemonicParsing="false" onAction="#updateLocation" text="Modifier Location" />
+                <Separator layoutX="-3.0" layoutY="72.0" prefHeight="0.0" prefWidth="898.0" />
+                <Separator layoutX="258.0" layoutY="268.0" orientation="VERTICAL" prefHeight="268.0" prefWidth="3.0" />
+                <Label layoutX="31.0" layoutY="98.0" text="Matricule" />
+                <Label layoutX="27.0" layoutY="160.0" text="ID_Client" />
+                <Label layoutX="313.0" layoutY="160.0" text="Date Debut" />
+                <TableView fx:id="tableLocation" layoutX="319.0" layoutY="296.0" prefHeight="229.0" prefWidth="513.0">
+                    <columns>
+                        <TableColumn fx:id="colMatricule" prefWidth="106.19998168945312" text="MATRICULE" />
+                        <TableColumn fx:id="colIdClient" prefWidth="89.79998779296875" text="ID_CLIENT" />
+                  <TableColumn fx:id="colDateDebut" prefWidth="114.60003662109375" text="DATE DEBUT" />
+                  <TableColumn fx:id="colDateFin" prefWidth="102.0" text="DATE FIN" />
+                  <TableColumn fx:id="colIdFacture" prefWidth="94.60003662109375" text="ID_FACTURE" />
+                    </columns>
+                </TableView>
+                <TextField fx:id="idClient" layoutX="111.0" layoutY="156.0" prefHeight="25.0" prefWidth="109.0" />
+                <TextField fx:id="matricule" layoutX="114.0" layoutY="94.0" prefHeight="25.0" prefWidth="109.0" />
+                <TextField fx:id="dateDebut" layoutX="411.0" layoutY="156.0" prefHeight="25.0" prefWidth="109.0" promptText="AAAA-MM-DD" />
+                <Button layoutX="344.0" layoutY="235.0" mnemonicParsing="false" onAction="#insertLocation" text="Ajouter Location" />
+                <Button layoutX="664.0" layoutY="235.0" mnemonicParsing="false" onAction="#deleteLocation" text="Supprimer Location" />
+                <TextArea fx:id="console" layoutX="27.0" layoutY="318.0" prefHeight="200.0" prefWidth="200.0" />
+                <Label layoutX="32.0" layoutY="290.0" prefHeight="17.0" prefWidth="65.0" text="Console" />
+                <Button fx:id="vehiculeBtn" layoutX="543.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadVehiculePage" style="-fx-background-color: #43BF8D;" text="Vehicule" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+                <Label layoutX="281.0" layoutY="23.0" prefHeight="33.0" prefWidth="125.0" text="Locations">
+                    <font>
+                        <Font name="Gill Sans MT" size="28.0" />
+                    </font>
+                </Label>
+                <Button fx:id="clientBtn" layoutX="423.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadClientPage" style="-fx-background-color: #43BF8D;" text="Clients" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+                <Button fx:id="factureBtn" layoutX="689.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadFacturePage" style="-fx-background-color: #43BF8D;" text="Facture" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+            <Label layoutX="627.0" layoutY="160.0" text="Date Fin" />
+            <Label layoutX="321.0" layoutY="98.0" text="ID Facture" />
+            <TextField fx:id="dateFin" layoutX="706.0" layoutY="156.0" prefHeight="25.0" prefWidth="120.0" promptText="AAAA-MM-DD" />
+            <TextField fx:id="idFacture" layoutX="405.0" layoutY="94.0" prefHeight="25.0" prefWidth="120.0" />
+            <Separator layoutX="-3.0" layoutY="266.0" prefHeight="3.0" prefWidth="266.0" />
+            <Label layoutX="627.0" layoutY="98.0" text="NbJours" />
+            <TextField fx:id="nbJours" layoutX="697.0" layoutY="94.0" prefHeight="25.0" prefWidth="125.0" />
+            </children>
+        </Pane>
+    </children>
+
+</AnchorPane>

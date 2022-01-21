@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.VehiculeController">
+    <children>
+        <Pane layoutY="6.0" prefHeight="735.0" prefWidth="1085.0" style="-fx-background-color: white;">
+            <children>
+                <ImageView fitHeight="53.0" fitWidth="200.0" layoutX="34.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/logo.JPG" />
+                    </image>
+                </ImageView>
+                <Button fx:id="updateVehiculeBtn" layoutX="926.0" layoutY="215.0" mnemonicParsing="false" onAction="#updateVehicule" text="Modifier" />
+                <Button fx:id="searchByMarqueBtn" layoutX="725.0" layoutY="320.0" mnemonicParsing="false" onAction="#getVehiculeByMarque" text="Rechercher par marque" />
+                <Button layoutX="916.0" layoutY="320.0" mnemonicParsing="false" onAction="#getVehiculeEnLocation" text="En cours de location" />
+                <Separator layoutX="-3.0" layoutY="74.0" prefHeight="3.0" prefWidth="1086.0" />
+                <Separator layoutX="253.0" layoutY="73.0" orientation="VERTICAL" prefHeight="662.0" prefWidth="14.0" />
+                <Label layoutX="27.0" layoutY="85.0" text="Matricule" />
+                <Label layoutX="31.0" layoutY="143.0" text="Marque" />
+                <Label layoutX="32.0" layoutY="197.0" text="Modele" />
+                <TableView fx:id="tableVehicule" layoutX="281.0" layoutY="368.0" prefHeight="341.0" prefWidth="780.0">
+                    <columns>
+                        <TableColumn fx:id="colMatricule" prefWidth="75.0" text="Matricule" />
+                        <TableColumn fx:id="colMarque" prefWidth="75.0" text="Marque" />
+                  <TableColumn fx:id="colModele" prefWidth="75.0" text="Modele" />
+                  <TableColumn fx:id="colKilometrage" prefWidth="75.0" text="Kilometrage" />
+                  <TableColumn fx:id="colBoite" prefWidth="75.0" text="Boite" />
+                  <TableColumn fx:id="colClimatisation" prefWidth="86.20001220703125" text="Climatisation" />
+                  <TableColumn fx:id="colReservoire" prefWidth="75.800048828125" text="Reservoire" />
+                  <TableColumn fx:id="colEtat" prefWidth="75.800048828125" text="Etat" />
+                  <TableColumn fx:id="colCarburant" prefWidth="75.800048828125" text="Carburant" />
+                  <TableColumn fx:id="colCategorie" prefWidth="75.800048828125" text="Catégorie" />
+                  <TableColumn fx:id="colTarifJour" prefWidth="75.800048828125" text="Tarif J" />
+                  <TableColumn fx:id="colCaution" prefWidth="75.800048828125" text="Caution" />
+                    </columns>
+                </TableView>
+                <TextField fx:id="inputMarque" layoutX="34.0" layoutY="168.0" prefHeight="25.0" prefWidth="137.0" />
+                <TextField fx:id="inputMatricule" layoutX="34.0" layoutY="108.0" prefHeight="25.0" prefWidth="137.0" />
+                <TextField fx:id="inputModele" layoutX="34.0" layoutY="218.0" prefHeight="25.0" prefWidth="137.0" />
+                <Button fx:id="deleteVehiculeBtn" layoutX="921.0" layoutY="170.0" mnemonicParsing="false" onAction="#deleteVehicule" text="Supprimer" />
+                <Button fx:id="addVehicule" layoutX="905.0" layoutY="118.0" mnemonicParsing="false" onAction="#insertVehicule" text="Ajouter Véhicule" />
+                <TextArea fx:id="console" layoutX="27.0" layoutY="368.0" prefHeight="200.0" prefWidth="200.0" />
+                <Label layoutX="32.0" layoutY="333.0" prefHeight="17.0" prefWidth="65.0" text="Console" />
+                <Button fx:id="clientBtn" layoutX="473.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadClientPage" style="-fx-background-color: #43BF8D;" text="Clients" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+                <Label layoutX="281.0" layoutY="23.0" prefHeight="33.0" prefWidth="110.0" text="Vehicules">
+                    <font>
+                        <Font name="Gill Sans MT" size="28.0" />
+                    </font>
+                </Label>
+                <Button fx:id="locationBtn" layoutX="670.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadLocationPage" style="-fx-background-color: #43BF8D;" text="Location" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+                <Button fx:id="factureBtn" layoutX="875.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadFacturePage" style="-fx-background-color: #43BF8D;" text="Facture" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font></Button>
+            <Separator layoutX="838.0" layoutY="75.0" orientation="VERTICAL" prefHeight="214.0" prefWidth="6.0" />
+            <Separator layoutX="7.0" layoutY="288.0" prefHeight="3.0" prefWidth="254.0" />
+            <Label layoutX="285.0" layoutY="85.0" text="Kilometrage" />
+            <Label layoutX="290.0" layoutY="143.0" text="Boite" />
+            <Label layoutX="487.0" layoutY="85.0" text="Reservoire" />
+            <RadioButton fx:id="climatisation" layoutX="286.0" layoutY="222.0" mnemonicParsing="false" text="Climatisation" />
+            <ChoiceBox fx:id="cbReservoire" layoutX="487.0" layoutY="108.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="cbEtat" layoutX="487.0" layoutY="168.0" prefWidth="150.0" />
+            <Label layoutX="488.0" layoutY="143.0" text="Etat" />
+            <TextField fx:id="inputKilometrage" layoutX="280.0" layoutY="108.0" prefHeight="25.0" prefWidth="103.0" />
+            <ChoiceBox fx:id="cbBoite" layoutX="274.0" layoutY="168.0" prefWidth="150.0" />
+            <Label layoutX="488.0" layoutY="205.0" text="Carburant" />
+            <ChoiceBox fx:id="cbCarburant" layoutX="487.0" layoutY="227.0" prefWidth="150.0" />
+            <Label layoutX="692.0" layoutY="143.0" text="Tarif Journalier" />
+            <Label layoutX="695.0" layoutY="201.0" text="Caution" />
+            <TextField fx:id="inputTarifJournalier" layoutX="692.0" layoutY="166.0" prefHeight="25.0" prefWidth="103.0" />
+            <TextField fx:id="inputCaution" layoutX="692.0" layoutY="226.0" prefHeight="25.0" prefWidth="103.0" />
+            <Label layoutX="692.0" layoutY="85.0" text="Catégorie" />
+            <ChoiceBox fx:id="cbCategorie" layoutX="687.0" layoutY="108.0" prefHeight="25.0" prefWidth="123.0" />
+            <Separator layoutX="247.0" layoutY="289.0" prefHeight="3.0" prefWidth="838.0" />
+            <Button layoutX="282.0" layoutY="320.0" mnemonicParsing="false" onAction="#getVehiculeEconomique" text=" Vehicule Economique" />
+            <Button layoutX="461.0" layoutY="320.0" mnemonicParsing="false" onAction="#getVehiculeLuxe" text="Vehicules Luxe" />
+            <Button layoutX="585.0" layoutY="320.0" mnemonicParsing="false" onAction="#getVehiculeConfort" text="Vehicule Confort" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

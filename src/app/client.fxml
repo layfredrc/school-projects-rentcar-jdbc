@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="818.0" prefWidth="1138.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ClientController">
+   <children>
+      <Pane layoutX="-5.0" prefHeight="818.0" prefWidth="1138.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="53.0" fitWidth="200.0" layoutX="34.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/logo.JPG" />
+               </image>
+            </ImageView>
+            <Button layoutX="530.0" layoutY="308.0" mnemonicParsing="false" onAction="#getClientLocationEnCours" text="Location en cours" />
+            <Button fx:id="searchByNameBtn" layoutX="366.0" layoutY="308.0" mnemonicParsing="false" onAction="#getClientByNom" text="Rechercher par nom" />
+            <Button layoutX="286.0" layoutY="308.0" mnemonicParsing="false" onAction="#getClientAaZ" text="A a Z" />
+            <Button fx:id="deletClientBtn" layoutX="947.0" layoutY="161.0" mnemonicParsing="false" onAction="#deleteClient" text="Supprimer" />
+            <Separator layoutX="-3.0" layoutY="75.0" prefHeight="3.0" prefWidth="1120.0" />
+            <Separator layoutX="255.0" layoutY="272.0" orientation="VERTICAL" prefHeight="538.0" prefWidth="20.0" />
+            <TableView fx:id="tableClient" layoutX="286.0" layoutY="359.0" prefHeight="428.0" prefWidth="819.0">
+              <columns>
+                <TableColumn fx:id="colClientID" prefWidth="72.19998168945312" text="ClientID" />
+                <TableColumn fx:id="colClientNom" prefWidth="105.4000244140625" text="Nom" />
+                  <TableColumn fx:id="colClientPrenom" prefWidth="75.80001831054688" text="Prenom" />
+                  <TableColumn fx:id="colClientEmail" prefWidth="136.0" text="Email" />
+                  <TableColumn fx:id="colClientTelephone" prefWidth="88.39996337890625" text="Telephone" />
+                  <TableColumn fx:id="colClientRue" prefWidth="90.199951171875" text="Rue" />
+                  <TableColumn fx:id="colClientVille" prefWidth="69.199951171875" text="Ville" />
+                  <TableColumn fx:id="colClientCodePostal" prefWidth="90.800048828125" text="CodePostal" />
+                  <TableColumn fx:id="colNbLocation" prefWidth="90.800048828125" text="NbLocation" />
+              </columns>
+            </TableView>
+            <Button fx:id="updateClientBtn" layoutX="953.0" layoutY="209.0" mnemonicParsing="false" onAction="#updateClient" text="Modifier" />
+            <Button fx:id="addClientBtn" layoutX="939.0" layoutY="116.0" mnemonicParsing="false" onAction="#insertClient" text="Ajouter Client" />
+            <TextArea fx:id="console" layoutX="22.0" layoutY="359.0" prefHeight="364.0" prefWidth="224.0" />
+            <Label layoutX="28.0" layoutY="312.0" prefHeight="17.0" prefWidth="65.0" text="Console" />
+            <Button fx:id="vehiculeBtn" layoutX="473.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadVehiculePage" style="-fx-background-color: #43BF8D;" text="Vehicule" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Label layoutX="281.0" layoutY="23.0" prefHeight="14.0" prefWidth="90.0" text="Clients">
+               <font>
+                  <Font name="Gill Sans MT" size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="locationBtn" layoutX="686.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadLocationPage" style="-fx-background-color: #43BF8D;" text="Location" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Button fx:id="factureBtn" layoutX="898.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadFacturePage" style="-fx-background-color: #43BF8D;" text="Facture" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
+            <Label layoutX="75.0" layoutY="100.0" text="Client ID" />
+            <Label layoutX="207.0" layoutY="100.0" text="Email" />
+            <Label layoutX="72.0" layoutY="188.0" text="Nom" />
+            <Label layoutX="201.0" layoutY="188.0" text="Prenom" />
+            <Label layoutX="474.0" layoutY="94.0" text="Telephone" />
+            <Label layoutX="685.0" layoutY="94.0" text="Rue" />
+            <Label layoutX="474.0" layoutY="173.0" text="Ville" />
+            <Label layoutX="674.0" layoutY="180.0" text="Code Postal" />
+            <TextField fx:id="inputClientID" layoutX="60.0" layoutY="131.0" prefHeight="25.0" prefWidth="109.0" promptText="Client ID" />
+            <TextField fx:id="inputEmailClient" layoutX="198.0" layoutY="131.0" prefHeight="25.0" prefWidth="149.0" promptText="Email" />
+            <TextField fx:id="inputNomClient" layoutX="60.0" layoutY="221.0" prefHeight="25.0" prefWidth="109.0" promptText="Nom" />
+            <TextField fx:id="inputPrenomClient" layoutX="198.0" layoutY="221.0" promptText="Prenom" />
+            <TextField fx:id="inputTelClient" layoutX="463.0" layoutY="128.0" prefHeight="25.0" prefWidth="149.0" promptText="0612345678" />
+            <Separator layoutX="425.0" layoutY="77.0" orientation="VERTICAL" prefHeight="193.0" prefWidth="6.0" />
+            <TextField fx:id="inputRueClient" layoutX="657.0" layoutY="128.0" promptText="Rue" />
+            <TextField fx:id="inputVilleClient" layoutX="463.0" layoutY="209.0" promptText="Ville" />
+            <TextField fx:id="inputCodePostalClient" layoutX="675.0" layoutY="209.0" prefHeight="25.0" prefWidth="61.0" promptText="75000" />
+            <Separator layoutX="-1.0" layoutY="268.0" prefHeight="17.0" prefWidth="1120.0" />
+            <Button layoutX="823.0" layoutY="308.0" mnemonicParsing="false" onAction="#getClientAyantLouerUnVehiculeDonne" text="A Loué le véhicule :" />
+            <TextField fx:id="inputVehiculeClient" layoutX="976.0" layoutY="311.0" prefHeight="25.0" prefWidth="103.0" />
+            <Label layoutX="966.0" layoutY="285.0" text="Matricule véhicule loué" />
+            <Separator layoutX="876.0" layoutY="82.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="6.0" />
+            <Label layoutX="773.0" layoutY="178.0" text="Nb Location" />
+            <TextField fx:id="inputNbLocation" layoutX="773.0" layoutY="209.0" prefHeight="25.0" prefWidth="65.0" />
+            <Button layoutX="688.0" layoutY="308.0" mnemonicParsing="false" onAction="#getClientJamaisLoue" text="N'a jamais loué" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
